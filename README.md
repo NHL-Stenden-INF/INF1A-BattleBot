@@ -1,2 +1,2 @@
 # INF1A-BattleBot
-Bye, World!
+Goodbye Cruel World
