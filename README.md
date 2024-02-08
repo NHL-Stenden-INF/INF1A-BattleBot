@@ -1,2 +1,2 @@
 # INF1A-BattleBot
-Hello, World!
+Bye, World!
