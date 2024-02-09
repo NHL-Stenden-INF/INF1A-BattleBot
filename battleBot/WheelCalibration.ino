@@ -1,4 +1,3 @@
-
 // Pin Configuration
 float leftOffsetPercentage = 1;      
 float rightOffsetPercentage = 1;  
@@ -44,17 +43,15 @@ void calibrate(){
     driveStop();
     Serial.print("Stopped Driving");
     Serial.println();
-    pulseAvgLeft /= 2;
-    pulseAvgRight /= 2;
     // Convert Pulse data to a 0-1 multiplier per wheel
     int maxPulses = max(pulseAvgLeft, pulseAvgRight);
-    leftOffsetPercentage = map(pulseAvgLeft, 0, maxPulses, 0, 100);
-    rightOffsetPercentage = map(pulseAvgRight, 0, maxPulses, 0, 100);
-    leftOffsetPercentage /= 100;
-    rightOffsetPercentage /= 100;
-    Serial.print(leftOffsetPercentage);
-    Serial.println();
-    Serial.print(rightOffsetPercentage);
+    int minPulses = min(pulseAvgLeft, pulseAvgRight);
+    double maxPulsesOffset = minPulses / maxPulses;
+//    leftOffsetPercentage = map(pulseAvgLeft, 0, maxPulses, 0, 100);
+//    rightOffsetPercentage = map(pulseAvgRight, 0, maxPulses, 0, 100);
+//    leftOffsetPercentage /= 100;
+//    rightOffsetPercentage /= 100;
+    Serial.print(maxPulsesOffset);
     Serial.println();
     Serial.println();
 }
