@@ -1,4 +1,4 @@
-const int motorLeftBack =   12;  // Motor A1 LB
+  const int motorLeftBack =   12;  // Motor A1 LB
 const int motorLeftFwd =    11;  // Motor A2 LF
 const int motorRightFwd =   10;  // Motor B1 RF
 const int motorRightBack =  6;   // Motor B2 RB
