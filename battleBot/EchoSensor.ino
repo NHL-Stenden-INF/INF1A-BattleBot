@@ -1,18 +1,5 @@
-#include <Adafruit_NeoPixel.h>
-#define PIN        2 
-#define NUMPIXELS  4
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-
-// Pin Config
-const int echoPinRead = A0; // Echo 
-const int echoPinSend = A1; // Trigger 
-
-// Variables
-const int stopDistance = 10; // Distance threshold to stop the robot (in cm)
-
 void setup() {
-  pinMode(echoPinRead, INPUT);
-  pinMode(echoPinSend, OUTPUT);
+
   // put your setup code here, to run once:
   Serial.begin(9600);
   pixels.begin();
