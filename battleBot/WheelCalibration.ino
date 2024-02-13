@@ -1,10 +1,10 @@
 
 // Pin Configuration
-float leftOffsetPercentage = 1;      
-float rightOffsetPercentage = 1;  
+double leftOffsetPercentage = 1;      
+double rightOffsetPercentage = 1;  
 
-int pulseAvgLeft;
-int pulseAvgRight;
+double pulsesLeft;
+double pulsesRight;
 
 // Adds pulses given for the given time to pulseAvg[Left, Right]
 void addPulses(int time){
@@ -15,15 +15,29 @@ void addPulses(int time){
     // Detects pulse on left side
     if(pulseLeftState != digitalRead(motorLeftRead)){
       pulseLeftState = digitalRead(motorLeftRead);
-      pulseAvgLeft++;
+      pulsesLeft++;
     }
     // Detects pulse on right side
     if(pulseRightState != digitalRead(motorRightRead)){
       pulseRightState = digitalRead(motorRightRead);
-      pulseAvgRight++;
+      pulsesRight++;
     }
     delay(10);
   }
+  Serial.println(pulsesLeft);
+  Serial.print(pulsesRight);
+  Serial.println();
+  double distanceRight = pulsesLeft;
+  double distanceLeft = pulsesRight;
+  double maxDistance = max(distanceLeft, distanceRight);
+  leftOffsetPercentage = distanceLeft/maxDistance;
+  rightOffsetPercentage = distanceRight/maxDistance;
+  double e = rightOffsetPercentage*distanceLeft;
+  double w = leftOffsetPercentage*distanceRight;
+  Serial.println(distanceLeft);
+  Serial.println(distanceRight);
+  Serial.println(e);
+  Serial.println(w);  
 }
 
 // Calculates wheel speed diffrence and match wheel speeds
@@ -32,7 +46,10 @@ void calibrate(){
     driveLeft(255);
     Serial.print("Driving Left");
     Serial.println();
-    addPulses(4000);
+    addPulses(1000);
+    addPulses(1000);
+    addPulses(1000);
+    addPulses(1000);
     driveStop();
     Serial.print("Stopped Driving");
     Serial.println();
@@ -40,23 +57,18 @@ void calibrate(){
     driveRight(255);
     Serial.print("Driving Right");
     Serial.println();
-    addPulses(4000);
+    addPulses(1000);
+    addPulses(1000);
+    addPulses(1000);
+    addPulses(1000);
     driveStop();
     Serial.print("Stopped Driving");
     Serial.println();
-    pulseAvgLeft /= 2;
-    pulseAvgRight /= 2;
+}
+
+void setCalibrationValues(){
     // Convert Pulse data to a 0-1 multiplier per wheel
-    int maxPulses = max(pulseAvgLeft, pulseAvgRight);
-    leftOffsetPercentage = map(pulseAvgLeft, 0, maxPulses, 0, 100);
-    rightOffsetPercentage = map(pulseAvgRight, 0, maxPulses, 0, 100);
-    leftOffsetPercentage /= 100;
-    rightOffsetPercentage /= 100;
-    Serial.print(leftOffsetPercentage);
-    Serial.println();
-    Serial.print(rightOffsetPercentage);
-    Serial.println();
-    Serial.println();
+
 }
 
 // Sets motor power to input
