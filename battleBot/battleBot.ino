@@ -1,8 +1,5 @@
 // Neopixel Setup
 #include <Adafruit_NeoPixel.h>
-#define PIN        2 
-#define NUMPIXELS  4
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 // Motor Pins
 const int motorLeftBack =   12;  // Motor A1 LB
@@ -22,6 +19,28 @@ const int stopDistance = 10; // Distance threshold to stop the robot (in cm)
 // Gripper Pins
 const int gripperServo = 3;
 
+//LED
+const int LED_PIN = 2;
+const int LED_COUNT = 4;
+const int brightness = 125;
+
+const int totalBlinks = 3;
+
+//Led Layout
+const int LB = 0;   //Left Back
+const int RB = 1;   //Right Back
+const int RF = 2;   //Right Front
+const int LF = 3;   //Left Front
+
+
+//Color Values
+const int RED[] = {255, 0, 0};
+const int GREEN[] = {0, 255, 0};
+const int BLUE[] = {0, 0, 255};
+const int ORANGE[] = {255, 80, 0};
+
+Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_RGB + NEO_KHZ800);
+
 void setup() {
   // Motor
   pinMode(motorLeftFwd,   OUTPUT);
@@ -38,18 +57,21 @@ void setup() {
   calibrate();
   driveForward(255);
   addPulses(10000);
+  //
+  //Color setup
+  strip.begin();
+  setPixelColor(LB, 255, 0, 0);
+  setPixelColor(RB, 255, 0, 0);
+  setPixelColor(RF, 255, 255, 255);
+  setPixelColor(LF, 255, 255, 255);
+  //
 }
 
 void loop() {
+  blink(LF);
   gripperOpen();
   delay(2000);
+  blink(RF);
   gripperClose();
   delay(2000);
-}
-
-void UpdateLights(int r, int g, int b){
-    for(int i=0; i < NUMPIXELS; i++){
-      pixels.setPixelColor(i, pixels.Color(g, r, b));  
-    }
-     pixels.show();
 }
