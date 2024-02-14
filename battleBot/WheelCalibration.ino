@@ -63,25 +63,16 @@ void calibrate(){
     driveStop();
     Serial.print("Stopped Driving");
     Serial.println();
-<<<<<<< HEAD
 }
 
 void setCalibrationValues(){
     // Convert Pulse data to a 0-1 multiplier per wheel
-
-=======
-    // Convert Pulse data to a 0-1 multiplier per wheel
-    int maxPulses = max(pulseAvgLeft, pulseAvgRight);
-    int minPulses = min(pulseAvgLeft, pulseAvgRight);
+    int maxPulses = max(pulsesLeft, pulsesRight);
+    int minPulses = min(pulsesLeft, pulsesRight);
     double maxPulsesOffset = minPulses / maxPulses;
-//    leftOffsetPercentage = map(pulseAvgLeft, 0, maxPulses, 0, 100);
-//    rightOffsetPercentage = map(pulseAvgRight, 0, maxPulses, 0, 100);
-//    leftOffsetPercentage /= 100;
-//    rightOffsetPercentage /= 100;
     Serial.print(maxPulsesOffset);
     Serial.println();
     Serial.println();
->>>>>>> f31e2092c657513dc726f95a95c42821d686e368
 }
 
 // Sets motor power to input

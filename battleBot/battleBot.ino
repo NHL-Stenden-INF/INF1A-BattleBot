@@ -20,7 +20,7 @@ const int echoPinSend = A1; // Trigger
 const int stopDistance = 10; // Distance threshold to stop the robot (in cm)
 
 // Gripper Pins
-const in gripperServo = 3;
+const int gripperServo = 3;
 
 void setup() {
   // Motor
@@ -42,4 +42,11 @@ void setup() {
 
 void loop() {
   
+}
+
+void UpdateLights(int r, int g, int b){
+    for(int i=0; i < NUMPIXELS; i++){
+      pixels.setPixelColor(i, pixels.Color(g, r, b));  
+    }
+     pixels.show();
 }

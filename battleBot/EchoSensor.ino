@@ -1,12 +1,4 @@
-void setup() {
-
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  pixels.begin();
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
+void sendEcho() {
   long duration, distance;
   digitalWrite(echoPinSend, LOW);
   delayMicroseconds(2);
@@ -22,11 +14,4 @@ void loop() {
   } else {
     UpdateLights(0, 255, 0);
   }
-}
-
-void UpdateLights(int r, int g, int b){
-    for(int i=0; i < NUMPIXELS; i++){
-      pixels.setPixelColor(i, pixels.Color(g, r, b));  
-    }
-     pixels.show();
 }
