@@ -1,5 +1,6 @@
-void sendEcho() {
-  long duration, distance;
+bool detectWall(long distance)
+{
+  long duration;
   digitalWrite(echoPinSend, LOW);
   delayMicroseconds(2);
   digitalWrite(echoPinSend, HIGH);
@@ -9,9 +10,12 @@ void sendEcho() {
   distance = duration * 0.034 / 2;
   Serial.println(distance);
   // Stop if distance is less than or equal to stopDistance
-  if (distance <= stopDistance) {
-    UpdateLights(255, 0, 0);
-  } else {
-    UpdateLights(0, 255, 0);
+  if (distance <= stopDistance) 
+  {
+    return true;
+  } 
+  else 
+  {
+    return false;
   }
 }
