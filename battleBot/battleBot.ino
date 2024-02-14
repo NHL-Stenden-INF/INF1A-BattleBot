@@ -60,10 +60,10 @@ void setup() {
   //
   //Color setup
   strip.begin();
-  setPixelColor(LB, 255, 0, 0);
-  setPixelColor(RB, 255, 0, 0);
-  setPixelColor(RF, 255, 255, 255);
-  setPixelColor(LF, 255, 255, 255);
+  setPixelRgb(LB, 255, 0, 0);
+  setPixelRgb(RB, 255, 0, 0);
+  setPixelRgb(RF, 255, 255, 255);
+  setPixelRgb(LF, 255, 255, 255);
   //
 }
 
