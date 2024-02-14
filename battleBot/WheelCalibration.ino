@@ -40,8 +40,8 @@ void addPulses(int time, bool leftForward, bool rightForward)
     delay(10);
   }
   double maxPulses = max(pulsesLeft, pulsesRight);
-  leftOffset  = pulsesLeft/maxPulses;
-  RightOffset = pulsesRight/maxPulses;
+  double leftOffset  = pulsesLeft/maxPulses;
+  double rightOffset = pulsesRight/maxPulses;
   if(leftForward)
   {
     leftBackwardOffset  = leftOffset;
