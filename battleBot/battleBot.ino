@@ -41,7 +41,10 @@ void setup() {
 }
 
 void loop() {
-  
+  gripperOpen();
+  delay(2000);
+  gripperClose();
+  delay(2000);
 }
 
 void UpdateLights(int r, int g, int b){

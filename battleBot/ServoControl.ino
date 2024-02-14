@@ -1,21 +1,35 @@
-void servoForward(){
-  moveGripper(1500);
+void echoSensorForward()
+{
+  moveGripper(1500, echoServo);
 }
 
-void servoLeft(){
-  moveGripper(2500);
+void echoSensorLeft()
+{
+  moveGripper(2500, echoServo);
 }
 
-void servoRight(){
-  moveGripper(500);
+void echoSensorRight()
+{
+  moveGripper(500, echoServo);
 }
 
-void moveGripper(int pulseDuration){
+void gripperOpen()
+{
+  moveGripper(1600, gripperServo);
+}
+
+void gripperClose()
+{
+  moveGripper(1000, gripperServo);
+}
+
+void moveGripper(int pulseDuration, int servo)
+{
   for(int i = 0; i < 10; i++)
   {
     delay(20);
-    digitalWrite(echoServo, HIGH);
+    digitalWrite(servo, HIGH);
     delayMicroseconds(pulseDuration);
-    digitalWrite(echoServo, LOW);
+    digitalWrite(servo, LOW);
   }
 }
